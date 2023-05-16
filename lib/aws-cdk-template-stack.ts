@@ -101,7 +101,6 @@ export class AwsCdkTemplateStack extends cdk.Stack {
         iam.ManagedPolicy.fromAwsManagedPolicyName('service-role/AmazonSSMAutomationRole'),
       ],
     });
-    // Resource handler returned message: "Invalid request provided: The execution role you provide must allow AWS EventBridge Scheduler to assume the role. 
     new cdk.aws_scheduler.CfnSchedule(this,"ec2-start-scheduler", {
         name: "ec2-start-scheduler",
         flexibleTimeWindow: {
