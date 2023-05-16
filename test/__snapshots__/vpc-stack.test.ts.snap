@@ -1,0 +1,567 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VpcStack 1`] = `
+Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5": Object {
+      "Properties": Object {
+        "CidrBlock": "10.0.0.0/16",
+        "EnableDnsHostnames": true,
+        "EnableDnsSupport": true,
+        "InstanceTenancy": "default",
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::VPC",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmIGW1C32C75A": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm",
+          },
+        ],
+      },
+      "Type": "AWS::EC2::InternetGateway",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmNatRole8BE205F0": Object {
+      "Properties": Object {
+        "AssumeRolePolicyDocument": Object {
+          "Statement": Array [
+            Object {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": Object {
+                "Service": Object {
+                  "Fn::Join": Array [
+                    "",
+                    Array [
+                      "ec2.",
+                      Object {
+                        "Ref": "AWS::URLSuffix",
+                      },
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmNatSecurityGroup96933567": Object {
+      "Properties": Object {
+        "GroupDescription": "Security Group for NAT instances",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "SecurityGroupIngress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "from 0.0.0.0/0:ALL TRAFFIC",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1DefaultRoute2813CB11": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1NatInstance2CE914A7",
+        },
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1RouteTableB94B9342",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1RouteTableAssociation8D5F0311": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1RouteTableB94B9342",
+        },
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1Subnet36719CEC",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1RouteTableB94B9342": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1Subnet36719CEC": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.0.96/27",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PrivateSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2DefaultRouteFED1DC55": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1NatInstance2CE914A7",
+        },
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2RouteTable4DCED998",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2RouteTable4DCED998": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2RouteTableAssociationD147F51A": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2RouteTable4DCED998",
+        },
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2Subnet1F1308D9",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet2Subnet1F1308D9": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.0.128/27",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PrivateSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3DefaultRoute33678D92": Object {
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "InstanceId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1NatInstance2CE914A7",
+        },
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3RouteTableFAED56E5",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3RouteTableAssociationCE9C341A": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3RouteTableFAED56E5",
+        },
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3Subnet9EA21295",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3RouteTableFAED56E5": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PrivateSubnet3",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet3Subnet9EA21295": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1c",
+        "CidrBlock": "10.0.0.160/27",
+        "MapPublicIpOnLaunch": false,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Private",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PrivateSubnet3",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1DefaultRoute9F1F9984": Object {
+      "DependsOn": Array [
+        "AwsCdkTemplateVpcStackvpcforec2andssmVPCGWDDC683D5",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmIGW1C32C75A",
+        },
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1RouteTable435F9BE6",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1NatInstance2CE914A7": Object {
+      "DependsOn": Array [
+        "AwsCdkTemplateVpcStackvpcforec2andssmNatRole8BE205F0",
+      ],
+      "Properties": Object {
+        "AvailabilityZone": "dummy1a",
+        "IamInstanceProfile": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1NatInstanceInstanceProfile6C026AD8",
+        },
+        "ImageId": "ami-1234",
+        "InstanceType": "t3.nano",
+        "SecurityGroupIds": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "AwsCdkTemplateVpcStackvpcforec2andssmNatSecurityGroup96933567",
+              "GroupId",
+            ],
+          },
+        ],
+        "SourceDestCheck": false,
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1SubnetC12A5FB4",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet1/NatInstance",
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": "#!/bin/bash",
+        },
+      },
+      "Type": "AWS::EC2::Instance",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1NatInstanceInstanceProfile6C026AD8": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmNatRole8BE205F0",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1RouteTable435F9BE6": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1RouteTableAssociation87151265": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1RouteTable435F9BE6",
+        },
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1SubnetC12A5FB4",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet1SubnetC12A5FB4": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1a",
+        "CidrBlock": "10.0.0.0/27",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet1",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2DefaultRoute4FB124A2": Object {
+      "DependsOn": Array [
+        "AwsCdkTemplateVpcStackvpcforec2andssmVPCGWDDC683D5",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmIGW1C32C75A",
+        },
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2RouteTable1D01B6F1",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2RouteTable1D01B6F1": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2RouteTableAssociation27CAB38B": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2RouteTable1D01B6F1",
+        },
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2Subnet4450B837",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet2Subnet4450B837": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1b",
+        "CidrBlock": "10.0.0.32/27",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet2",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3DefaultRoute1BE989B2": Object {
+      "DependsOn": Array [
+        "AwsCdkTemplateVpcStackvpcforec2andssmVPCGWDDC683D5",
+      ],
+      "Properties": Object {
+        "DestinationCidrBlock": "0.0.0.0/0",
+        "GatewayId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmIGW1C32C75A",
+        },
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3RouteTable793F0C90",
+        },
+      },
+      "Type": "AWS::EC2::Route",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3RouteTable793F0C90": Object {
+      "Properties": Object {
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet3",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::RouteTable",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3RouteTableAssociationFAF1C81D": Object {
+      "Properties": Object {
+        "RouteTableId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3RouteTable793F0C90",
+        },
+        "SubnetId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3Subnet44B370DA",
+        },
+      },
+      "Type": "AWS::EC2::SubnetRouteTableAssociation",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmPublicSubnet3Subnet44B370DA": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1c",
+        "CidrBlock": "10.0.0.64/27",
+        "MapPublicIpOnLaunch": true,
+        "Tags": Array [
+          Object {
+            "Key": "aws-cdk:subnet-name",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "aws-cdk:subnet-type",
+            "Value": "Public",
+          },
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-VpcStack/AwsCdkTemplate-VpcStack-vpc_for_ec2_and_ssm/PublicSubnet3",
+          },
+        ],
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::Subnet",
+    },
+    "AwsCdkTemplateVpcStackvpcforec2andssmVPCGWDDC683D5": Object {
+      "Properties": Object {
+        "InternetGatewayId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssmIGW1C32C75A",
+        },
+        "VpcId": Object {
+          "Ref": "AwsCdkTemplateVpcStackvpcforec2andssm1E664AD5",
+        },
+      },
+      "Type": "AWS::EC2::VPCGatewayAttachment",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

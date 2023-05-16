@@ -1,0 +1,144 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Ec2Stack 1`] = `
+Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+    "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter": Object {
+      "Default": "/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2",
+      "Type": "AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>",
+    },
+  },
+  "Resources": Object {
+    "AwsCdkTemplateEc2Stackgeneralpurposeec221780F40": Object {
+      "Properties": Object {
+        "AvailabilityZone": "dummy1a",
+        "IamInstanceProfile": Object {
+          "Ref": "AwsCdkTemplateEc2Stackgeneralpurposeec2InstanceProfile3410BCD6",
+        },
+        "ImageId": Object {
+          "Ref": "SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter",
+        },
+        "InstanceType": "t3.nano",
+        "SecurityGroupIds": Array [
+          Object {
+            "Fn::GetAtt": Array [
+              "AwsCdkTemplateEc2Stackgeneralpurposeec2InstanceSecurityGroup50111657",
+              "GroupId",
+            ],
+          },
+        ],
+        "SubnetId": Object {
+          "Fn::ImportValue": "AwsCdkTemplate-VpcStack:ExportsOutputRefAwsCdkTemplateVpcStackvpcforec2andssmPrivateSubnet1Subnet36719CEC6B0F3C7C",
+        },
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-Ec2Stack/AwsCdkTemplate-Ec2Stack-general_purpose_ec2",
+          },
+        ],
+        "UserData": Object {
+          "Fn::Base64": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "Content-Type: multipart/mixed; boundary=\\"+AWS+CDK+User+Data+Separator==\\"
+MIME-Version: 1.0
+
+--+AWS+CDK+User+Data+Separator==
+Content-Type: text/cloud-config; charset=\\"utf8\\"
+Content-Transfer-Encoding: base64
+
+",
+                Object {
+                  "Fn::Base64": "
+#cloud-config
+cloud_final_modules:
+  - [users-groups, always]
+users:
+  - default
+  - name: admis
+    groups: [wheel]
+    sudo: [\\"ALL=(ALL) NOPASSWD:ALL\\"]
+    shell: /bin/bash
+    ssh-authorized-keys:
+      - ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGsHMbqflou/Pow660rnIJq8wdtCnoJhzZfh6BAOWrxQ admis@admis-MS-7A34
+
+",
+                },
+                "
+--+AWS+CDK+User+Data+Separator==--
+",
+              ],
+            ],
+          },
+        },
+      },
+      "Type": "AWS::EC2::Instance",
+    },
+    "AwsCdkTemplateEc2Stackgeneralpurposeec2InstanceProfile3410BCD6": Object {
+      "Properties": Object {
+        "Roles": Array [
+          Object {
+            "Fn::ImportValue": "AwsCdkTemplate-SsmStack:ExportsOutputRefAwsCdkTemplateSsmStackiamroleforssmF524EAAE214DB9E2",
+          },
+        ],
+      },
+      "Type": "AWS::IAM::InstanceProfile",
+    },
+    "AwsCdkTemplateEc2Stackgeneralpurposeec2InstanceSecurityGroup50111657": Object {
+      "Properties": Object {
+        "GroupDescription": "AwsCdkTemplate-Ec2Stack/AwsCdkTemplate-Ec2Stack-general_purpose_ec2/InstanceSecurityGroup",
+        "SecurityGroupEgress": Array [
+          Object {
+            "CidrIp": "0.0.0.0/0",
+            "Description": "Allow all outbound traffic by default",
+            "IpProtocol": "-1",
+          },
+        ],
+        "Tags": Array [
+          Object {
+            "Key": "Name",
+            "Value": "AwsCdkTemplate-Ec2Stack/AwsCdkTemplate-Ec2Stack-general_purpose_ec2",
+          },
+        ],
+        "VpcId": Object {
+          "Fn::ImportValue": "AwsCdkTemplate-VpcStack:ExportsOutputRefAwsCdkTemplateVpcStackvpcforec2andssm1E664AD5227AD8D4",
+        },
+      },
+      "Type": "AWS::EC2::SecurityGroup",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;
