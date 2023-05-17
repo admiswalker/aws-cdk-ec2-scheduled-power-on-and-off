@@ -106,14 +106,28 @@ export class AwsCdkTemplateStack extends cdk.Stack {
         flexibleTimeWindow: {
             mode: "OFF"
         },
-        scheduleExpression: "cron(0 15 ? * * *)", // Showtdown every 00:00 (JST)
-        scheduleExpressionTimezone: 'America/Chicago',
-        description: 'Event that start EC2 instances',
+        scheduleExpression: "cron(0 14 ? * * *)", // Mins Hours  // Showtdown every 23:00 (JST)
+        scheduleExpressionTimezone: 'Asia/Tokyo',
+        description: 'Event that start EC2 instance(s)',
         target: {
           arn: 'arn:aws:scheduler:::aws-sdk:ec2:startInstances',
           roleArn: ec2_schedule_iam_role.roleArn,
           input: JSON.stringify({ InstanceIds:[ec2_instance.instanceId] }),
         },
+    });
+    new cdk.aws_scheduler.CfnSchedule(this,"ec2-stop-scheduler", {
+      name: "ec2-stop-scheduler",
+      flexibleTimeWindow: {
+          mode: "OFF"
+      },
+      scheduleExpression: "cron(0 21 ? * * *)", // Showtdown every 06:00 (JST)
+      scheduleExpressionTimezone: 'Asia/Tokyo',
+      description: 'Event that stop EC2 instance(s)',
+      target: {
+          arn: 'arn:aws:scheduler:::aws-sdk:ec2:stopInstances',
+          roleArn: ec2_schedule_iam_role.roleArn,
+          input: JSON.stringify({ InstanceIds:[ec2_instance.instanceId] }),
+      },
     });
 
     //---
