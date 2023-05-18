@@ -1,5 +1,7 @@
 # aws-cdk-ec2-scheduled-power-on-and-off
 
+このリポジトリでは，Amazon EventBridge Scheduler で，EC2 インスタンスの定時起動，定時シャットダウンをする．
+
 ## 構成図
 
 ![](architecture.drawio.png)
@@ -13,6 +15,10 @@ EC2_INSTANCE_ID=$(aws ec2 describe-instances \
     --output text)
 ssh -i ~/.ssh/ec2/id_ed25519 admis@$EC2_INSTANCE_ID
 ```
+
+## Cron 式のフォーマット
+
+https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/events/ScheduledEvents.html
 
 ## よく使うコマンド
 

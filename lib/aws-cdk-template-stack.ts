@@ -106,7 +106,7 @@ export class AwsCdkTemplateStack extends cdk.Stack {
         flexibleTimeWindow: {
             mode: "OFF"
         },
-        scheduleExpression: "cron(0 14 ? * * *)", // Mins Hours  // Showtdown every 23:00 (JST)
+        scheduleExpression: "cron(10 22 ? * MON-FRI *)", // Mins Hours Day Mon Week Year // Start every 22:10 (JST) // ref: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/events/ScheduledEvents.html
         scheduleExpressionTimezone: 'Asia/Tokyo',
         description: 'Event that start EC2 instance(s)',
         target: {
@@ -120,7 +120,7 @@ export class AwsCdkTemplateStack extends cdk.Stack {
       flexibleTimeWindow: {
           mode: "OFF"
       },
-      scheduleExpression: "cron(0 21 ? * * *)", // Showtdown every 06:00 (JST)
+      scheduleExpression: "cron(15 22 ? * MON-FRI *)", // Mins Hours Day Mon Week Year // Stop every 22:15 (JST) // ref: https://docs.aws.amazon.com/ja_jp/AmazonCloudWatch/latest/events/ScheduledEvents.html
       scheduleExpressionTimezone: 'Asia/Tokyo',
       description: 'Event that stop EC2 instance(s)',
       target: {
